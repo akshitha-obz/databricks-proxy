@@ -64,5 +64,10 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print(f"Proxy running on http://0.0.0.0:{port}")
     print(f"Test: curl http://localhost:{port}/health")
-    print(f"Test: curl 'http://localhost:{port}/api/2.1/jobs/runs/get?run_id=1097080613263872'")
-    app.run(host="0.0.0.0", port=port, debug=False)
+    print(f"Test: curl 'http://localhost:{port}/api/2.1/jobs/runs/get?run_id=1097080613263871'")
+    try:
+        app.run(host="0.0.0.0", port=port, debug=False)
+    except RuntimeError as e:
+        print(f"Error: {e}")
+        print("Handling simulated failure gracefully.")
+        exit(1)
